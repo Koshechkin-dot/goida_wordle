@@ -51,6 +51,7 @@ public class InputManager : MonoBehaviour
         { KeyCode.U, 'Ã' },
         { KeyCode.I, 'Ø' },
         { KeyCode.O, 'Ù' },
+        { KeyCode.P, 'Ç' },
         { KeyCode.LeftBracket, 'Õ' },
         { KeyCode.RightBracket, 'Ú' },
         { KeyCode.A, 'Ô' },

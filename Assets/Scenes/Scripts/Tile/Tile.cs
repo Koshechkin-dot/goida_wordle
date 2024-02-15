@@ -10,13 +10,13 @@ public class Tile : MonoBehaviour
         switch (colors)
         {
             case TileColors.None:
-                sprite.color = new Color(1, 0, 0, 0.5f);
+                sprite.color = new Color(1, 0, 0, 0.25f);
                 break;
             case TileColors.Valid:
-                sprite.color = new Color(0, 1, 0, 0.5f);
+                sprite.color = new Color(0, 1, 0, 0.25f);
                 break;
             case TileColors.Exist:
-                sprite.color = new Color(0.5f, 0.5f, 0, 0.5f);
+                sprite.color = new Color(0.8f, 0.8f, 0, 0.25f);
                 break;
         }
     }
