@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,87 +8,92 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GridManager GridManager;
     [SerializeField] private int rows = 6;
     [SerializeField] private int columns = 6;
-    private int currTry = 0;
-    private int currLetter = 0;
     [SerializeField] private string secretWord;
-    private Tile[] thisTryTiles;
-    
+    [Header("States")]
+    public TileState valid;
+    public TileState exist;
+    public TileState notExist;
+
+    private List<string> words;
+
+    private int tilePointer;
+    private int rowPointer;
+    private Row currentRow;
+   
     
     void Start()
     {
+        TextAsset textAsset = Resources.Load("word_storage") as TextAsset;
+        words = textAsset.text.Split("\r\n").ToList();
+        secretWord = words[Random.Range(0, words.Count)];
         GridManager.GenerateGrid(rows,columns);
-        thisTryTiles = GridManager.GetTilesInRow(currTry);
+        tilePointer = 0;
+        rowPointer = 0;
+        currentRow = GridManager.GetRow(rowPointer);
+        
     }
 
     public void AddLetter(char letter)
     {
-        if(currLetter < 5)
+        if(tilePointer < columns)
         {
-            thisTryTiles[currLetter].ChangeText(letter.ToString());
-            currLetter++;
-        }
-        else if(currLetter == 5) 
-        {
-            thisTryTiles[currLetter].ChangeText(letter.ToString());
+            currentRow[tilePointer].SetLetter(letter);
+            tilePointer++;
         }
     }
+
     public void RemoveLetter()
     {
-        if(currLetter > 0)
-        {
-            thisTryTiles[currLetter].ChangeText(string.Empty);       
-            currLetter--;
-        }
-        else if(currLetter == 0)
-        {
-            thisTryTiles[currLetter].ChangeText(string.Empty);
-        }
+        tilePointer = Mathf.Max(tilePointer - 1, 0);
+        currentRow[tilePointer].SetLetter('\0');
     }
-    public void ApplyWord()
+
+    public void Restart()
     {
-        if(currLetter == 5)
+        rowPointer = 0;
+        tilePointer = 0;
+        currentRow = GridManager.GetRow(rowPointer);
+        secretWord = words[Random.Range(0, words.Count)];
+        GridManager.ClearGrid(notExist);
+    }
+
+    public void SubmitWord()
+    {
+        if(tilePointer == columns)
         {
-            string userWord = GridManager.GetWordInRow(currTry);
-            if(userWord == secretWord)
+            string userWord = currentRow.GetWord();
+            if(secretWord == userWord)
             {
-                foreach(Tile tile in thisTryTiles)
+                foreach(Tile tile in currentRow)
                 {
-                    tile.ChangeColor(TileColors.Valid);
-                    //красава
+                    tile.SetState(valid);
                 }
+                //won
             }
             else
             {
-                for(int i = 0; i < secretWord.Length; i++) 
+                for (int i = 0; i < secretWord.Length; i++)
                 {
                     if (userWord[i] == secretWord[i])
-                    {
-                        thisTryTiles[i].ChangeColor(TileColors.Valid);
-                    }
+                        currentRow[i].SetState(valid);
                     else if (secretWord.Contains(userWord[i]))
-                    {
-                        thisTryTiles[i].ChangeColor(TileColors.Exist);
-                    }
-                }
-
-                currTry++;
-                currLetter = 0;
-
-                if (currTry == rows)
-                {
-                    //лох
-                }
-                else
-                {
-                    thisTryTiles = GridManager.GetTilesInRow(currTry);
+                        currentRow[i].SetState(exist);
+                       
                 }
             }
+
+            rowPointer++;
+            if(rowPointer == rows)
+            {
+                //lose
+                return;
+            }
+            else
+            {
+                currentRow = GridManager.GetRow(rowPointer);
+                tilePointer = 0;
+            }
+
         }
-    }
-    public void Restart()
-    {
-        GridManager.ClearGrid();
-        currTry = 0;
-        currLetter = 0;
     }
 }
