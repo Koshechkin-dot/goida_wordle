@@ -227,7 +227,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.98039216, g: 0.89411765, b: 0.6509804, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -317,13 +317,13 @@ MonoBehaviour:
   columns: 6
   secretWord: 
   valid:
-    TileColor: {r: 0.41301227, g: 1, b: 0, a: 1}
+    TileColor: {r: 0.2627451, g: 0.6745098, b: 0.4627451, a: 1}
     OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   exist:
-    TileColor: {r: 1, g: 0.632266, b: 0, a: 1}
+    TileColor: {r: 0.9607843, g: 0.69803923, b: 0.37254903, a: 1}
     OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   notExist:
-    TileColor: {r: 1, g: 1, b: 1, a: 1}
+    TileColor: {r: 0.54901963, g: 0.70980394, b: 0.80784315, a: 1}
     OutlineColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1300679184
 Transform:
