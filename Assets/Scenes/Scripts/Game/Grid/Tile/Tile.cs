@@ -7,7 +7,6 @@ public class Tile : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private Image image;
     private Outline outline;
-
     public char Letter {  get; private set; }
     public TileState TileState { get; private set; }
 
@@ -29,7 +28,5 @@ public class Tile : MonoBehaviour
         TileState = state;
         image.color = state.TileColor;
         outline.effectColor = state.OutlineColor;
-    }
-
-    
+    }  
 }

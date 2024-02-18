@@ -1,7 +1,8 @@
 using UnityEngine;
 
 [System.Serializable]
-public class TileState 
+[CreateAssetMenu(fileName = "TileState", menuName = "GameDesign/TileState")]
+public class TileState : ScriptableObject
 {
     public Color TileColor;
     public Color OutlineColor;

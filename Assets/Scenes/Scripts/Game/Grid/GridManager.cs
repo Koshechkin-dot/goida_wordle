@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public List<Row> Rows = new List<Row>();
+    private List<Row> Rows;
+    private TileState None;
+
+    private void Awake()
+    {
+        Rows = new List<Row>();
+        None = Resources.Load("TileStates/None") as TileState;
+    }
 
     public void GenerateGrid(int rows, int cols)
     {
@@ -17,7 +24,7 @@ public class GridManager : MonoBehaviour
 
             List<Tile> tiles = new List<Tile>();
             for (int j = 0; j < cols; j++)
-            {   
+            {
                 var tile = Instantiate(tileRef, row.transform);
                 tiles.Add(tile.GetComponent<Tile>());
             }
@@ -26,16 +33,23 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void ClearGrid(TileState none)
+    public void ClearGrid()
     {
         for(int i = 0;i < Rows.Count;i++)
         {
             foreach (Tile tile in Rows[i]) 
             {
                 tile.SetLetter('\0');
-                tile.SetState(none);
+                tile.SetState(None);
             }
         }
+    }
+
+    public void DestroyGrid()
+    {
+        for (int i = 0; i < Rows.Count; i++)
+            Destroy(Rows[i].gameObject);
+        Rows.Clear();
     }
 
     public Row GetRow(int rowIndex) => Rows[rowIndex];

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {   
-    private GameManager gameManager;
+    private IGameInput gameInput;
     private readonly List<KeyCode> ALLOWED_KEYS = new List<KeyCode>()
     {
         KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P,
@@ -22,27 +22,26 @@ public class InputManager : MonoBehaviour
         { KeyCode.N, 'Т' }, { KeyCode.M, 'Ь' }, { KeyCode.Comma, 'Б' }, { KeyCode.Period, 'Ю' }, { KeyCode.BackQuote, 'Ё' },
     };
 
-    void Start()
+    public void Inject(IGameInput gameInput)
     {
-        gameManager = GetComponentInParent<GameManager>();
+        this.gameInput = gameInput;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.anyKeyDown)
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                gameManager.RemoveLetter();
+                gameInput.RemoveLetter();
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                gameManager.SubmitWord();
+                gameInput.SubmitWord();
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameManager.Restart();
+                gameInput.Restart();
             }
             else
             {
@@ -50,7 +49,7 @@ public class InputManager : MonoBehaviour
                 {
                     if (Input.GetKeyDown(keyCode))
                     {
-                        gameManager.AddLetter(KEYS_ON_RUSSIAN[keyCode]);
+                        gameInput.AddLetter(KEYS_ON_RUSSIAN[keyCode]);
                     }
                 }
             }

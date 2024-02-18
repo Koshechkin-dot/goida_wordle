@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 public class Row : MonoBehaviour
@@ -17,7 +18,11 @@ public class Row : MonoBehaviour
         return tiles.GetEnumerator();
     }
 
-    public void SetTiles(IEnumerable<Tile> tiles) => this.tiles = tiles.ToList();
+    public void SetTiles(IEnumerable<Tile> tiles)
+    {
+        this.tiles = tiles.ToList();
+    }
+
 
     public string GetWord()
     {

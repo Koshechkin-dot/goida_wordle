@@ -313,18 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridManager: {fileID: 1398762435}
-  rows: 6
-  columns: 6
-  secretWord: 
-  valid:
-    TileColor: {r: 0.2627451, g: 0.6745098, b: 0.4627451, a: 1}
-    OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-  exist:
-    TileColor: {r: 0.9607843, g: 0.69803923, b: 0.37254903, a: 1}
-    OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-  notExist:
-    TileColor: {r: 0.54901963, g: 0.70980394, b: 0.80784315, a: 1}
-    OutlineColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1300679184
 Transform:
   m_ObjectHideFlags: 0
@@ -416,7 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49518039437b0e244bc16784e712e60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rows: []
 --- !u!1 &1413012723
 GameObject:
   m_ObjectHideFlags: 0

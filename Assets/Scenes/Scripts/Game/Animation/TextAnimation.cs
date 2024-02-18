@@ -4,11 +4,12 @@ using TMPro;
 public class TextAnimation : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textMeshPro;
+    private AudioSource Audio;
     private string previousText = string.Empty;
 
     private void Start()
     {
-        
+        Audio = GetComponentInParent<AudioSource>();
         AnimateText();
     }
 
@@ -17,6 +18,8 @@ public class TextAnimation : MonoBehaviour
         if (textMeshPro.text != previousText)
         {
             AnimateText();
+            Audio.pitch = Random.Range(0.9f, 1.1f);
+            Audio.Play();
             previousText = textMeshPro.text;
         }
     }
