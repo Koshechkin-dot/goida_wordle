@@ -10,7 +10,6 @@ public class TextAnimation : MonoBehaviour
     private void Start()
     {
         Audio = GetComponentInParent<AudioSource>();
-        AnimateText();
     }
 
     private void Update()

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d3922f83a3d0243ab2018e54f6c71b, type: 3}
   m_Name: Exist
   m_EditorClassIdentifier: 
-  TileColor: {r: 1, g: 0.57853025, b: 0, a: 1}
+  TileColor: {r: 0.9607843, g: 0.69803923, b: 0.37254903, a: 1}
   OutlineColor: {r: 0, g: 0, b: 0, a: 0}
