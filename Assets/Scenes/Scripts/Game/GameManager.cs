@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     {
         gameInteractor = new GameInteractor(GridManager, this, "Words/word_storage");
         GetComponentInChildren<InputManager>().Inject(gameInteractor);
-        gameInteractor.Inject(new MemoryChallengeSubmitter());
+        gameInteractor.Inject(new NormalSubmitter());
         gameInteractor.StartGame(6,6);
     }
 }
