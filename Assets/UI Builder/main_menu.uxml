@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Builder/user_uss.uss?fileID=7433441132597879392&amp;guid=c121119330087e145971f2f5f3bc81d9&amp;type=3#user_uss" />
     <ui:Label tabindex="-1" text="Goidle" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="title-style" style="top: 15%;" />
-    <ui:Button text="Играть" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Start" class="basic-style" style="cursor: url(&quot;project://database/Assets/UI%20Builder/hand_cursor.png?fileID=2800000&amp;guid=21ded8b8c699b17488692fbebc1254be&amp;type=3#hand_cursor&quot;); margin-top: 25%;" />
-    <ui:Button text="Выход" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quit" class="basic-style" style="cursor: url(&quot;project://database/Assets/UI%20Builder/hand_cursor.png?fileID=2800000&amp;guid=21ded8b8c699b17488692fbebc1254be&amp;type=3#hand_cursor&quot;); margin-top: 5%;" />
+    <ui:Button text="Играть" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Start" class="basic-style" style="margin-top: 25%;" />
+    <ui:Button text="Выход" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quit" class="basic-style" style="margin-top: 5%;" />
 </ui:UXML>
