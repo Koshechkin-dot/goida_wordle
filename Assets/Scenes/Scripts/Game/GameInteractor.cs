@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class GameInteractor : IGameInput
@@ -75,12 +77,19 @@ public class GameInteractor : IGameInput
         {
             if (wordSubmitter.SubmitWord(currentRow, SecretWord))
             {
-                //win
+                var message = GameObject.Find("SECRET_WORD").GetComponent<TextMeshProUGUI>();
+                message.text = $"Верно! Секретное слово было: {SecretWord}";
+                Thread.Sleep(2000);
+                message.text = "";
+                Restart();
             }
             else if (rowPointer + 1 >= rows)
             {
-                //lose
-                return;
+                var message = GameObject.Find("SECRET_WORD").GetComponent<TextMeshProUGUI>();
+                message.text = $"Неверно! Секретное слово было: {SecretWord}";
+                Thread.Sleep(2000);
+                message.text = "";
+                Restart();
             }
             else GoNextTry();
         }
