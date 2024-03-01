@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: InvalidPosition
   m_EditorClassIdentifier: 
   TileColor: {r: 0.7075472, g: 0.26366144, b: 0.26366144, a: 1}
-  OutlineColor: {r: 0, g: 0, b: 0, a: 0}
+  OutlineColor: {r: 0.28627452, g: 0.28627452, b: 0.28627452, a: 1}
