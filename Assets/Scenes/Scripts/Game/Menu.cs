@@ -3,7 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public void QuitApplication() => Application.Quit();
 
-    public void StartGame() => SceneManager.LoadScene("Game", LoadSceneMode.Single);
+    [SerializeField] private GameObject MainMenu;
+    [SerializeField] private GameObject SelectMenu;
+
+    public void OnQuitClick() => Application.Quit();
+
+    public void OnStartClick()
+    {
+        MainMenu.SetActive(false);
+        SelectMenu.SetActive(true);
+    }
+
+    public void OnEasyButtonClick()
+    {
+        SceneManager.LoadScene("Game");
+    }
 }

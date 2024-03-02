@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GridManager : MonoBehaviour
+public class GridManager : MonoBehaviour, IService
 {
     private List<Row> Rows;
-    private TileState None;
+    private TileState Default;
 
     private void Awake()
     {
+        ServiceLocator.Instance.Register(this);
         Rows = new List<Row>();
-        None = Resources.Load("TileStates/None") as TileState;
+        Default = Resources.Load("TileStates/Default") as TileState;
     }
 
     public void GenerateGrid(int rows, int cols)
@@ -40,7 +41,7 @@ public class GridManager : MonoBehaviour
             foreach (Tile tile in Rows[i]) 
             {
                 tile.SetLetter('\0');
-                tile.SetState(None);
+                tile.SetState(Default);
             }
         }
     }

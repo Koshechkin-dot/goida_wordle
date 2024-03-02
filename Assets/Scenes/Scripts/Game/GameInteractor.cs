@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using TMPro;
 using UnityEngine;
 
 public class GameInteractor : IGameInput
@@ -11,27 +7,31 @@ public class GameInteractor : IGameInput
     private int rowPointer;
     private int tilePointer;
     private Row currentRow;
-
-    private List<string> words;
     private string SecretWord;
 
+    #region services
+    private EventBus eventBus;
     private GameManager gameManager;
     private GridManager gridManager;
+    private WordBase wordBase;
     private IWordSubmitter wordSubmitter;
-    
-    public GameInteractor(GridManager grid, GameManager manager, string wordsBase)
+    #endregion
+
+    //берем ссылки на нужные сервисы
+    public GameInteractor()
     {
-        gridManager = grid;
-        gameManager = manager;
-        TextAsset textAsset = (TextAsset)Resources.Load(wordsBase);
-        words = textAsset.text.Split("\r\n").ToList();
+        eventBus = ServiceLocator.Instance.Get<EventBus>(); 
+        gameManager = ServiceLocator.Instance.Get<GameManager>();
+        gridManager = ServiceLocator.Instance.Get<GridManager>();
+        wordBase = ServiceLocator.Instance.Get<WordBaseLoader>().GetBase();
     }
 
+    //прокидываем логику сабмиттера
     public void Inject(IWordSubmitter wordSubmitter) => this.wordSubmitter = wordSubmitter;
 
     public void StartGame(int rows, int columns)
     {
-        GenerateWord();
+        SecretWord = "РАБОТА"; //поменять на релизе
         rowPointer = 0;
         tilePointer = 0;
         this.rows = rows;
@@ -39,10 +39,7 @@ public class GameInteractor : IGameInput
         gridManager.GenerateGrid(rows, columns);
         currentRow = gridManager.GetRow(rowPointer);
     }
-    protected void GenerateWord()
-    {
-        SecretWord = "РАБОТА";
-    }
+    
     public void AddLetter(char letter)
     {
         if (tilePointer < columns)
@@ -61,37 +58,40 @@ public class GameInteractor : IGameInput
         rowPointer = 0;
         tilePointer = 0;
         currentRow = gridManager.GetRow(rowPointer);
-        SecretWord = words[Random.Range(0, words.Count)];
+        SecretWord = wordBase.GetRandomWord();
         gridManager.ClearGrid();
-        gameManager.word = SecretWord;
+        gameManager.word = SecretWord; //удалить на релизе
+    }  
+    public void SubmitWord()
+    {
+        if (tilePointer == columns)
+        {
+            string userWord = currentRow.GetWord();
+            if(wordBase.Validate(userWord))
+            {
+                if (wordSubmitter.SubmitWord(currentRow, SecretWord)) //если верно
+                {
+                    eventBus.Invoke(new ScoreChanged(100));
+                    Restart();
+                }
+                else if (rowPointer + 1 >= rows) //если попытки кончились
+                {
+                    eventBus.Invoke(new ScoreClear());
+                    Restart();
+                }
+                else GoNextTry(); //следующая попытка
+            }
+            else
+            {
+                //слово не прошло валидацию, надо придумать анимацию на это
+            }
+        }
     }
+
     private void GoNextTry()
     {
         rowPointer++;
         currentRow = gridManager.GetRow(rowPointer);
         tilePointer = 0;
-    }
-    public void SubmitWord()
-    {
-        if (tilePointer == columns)
-        {
-            if (wordSubmitter.SubmitWord(currentRow, SecretWord))
-            {
-                var message = GameObject.Find("SECRET_WORD").GetComponent<TextMeshProUGUI>();
-                message.text = $"Верно! Секретное слово было: {SecretWord}";
-                Thread.Sleep(2000);
-                message.text = "";
-                Restart();
-            }
-            else if (rowPointer + 1 >= rows)
-            {
-                var message = GameObject.Find("SECRET_WORD").GetComponent<TextMeshProUGUI>();
-                message.text = $"Неверно! Секретное слово было: {SecretWord}";
-                Thread.Sleep(2000);
-                message.text = "";
-                Restart();
-            }
-            else GoNextTry();
-        }
     }
 }

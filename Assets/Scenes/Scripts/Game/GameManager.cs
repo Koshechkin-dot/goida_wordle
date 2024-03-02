@@ -1,17 +1,23 @@
+using TMPro;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IService
 {
-    [SerializeField] private GridManager GridManager;
     //this is only for debug
     [SerializeField] public string word;
 
     private GameInteractor gameInteractor;
     void Start()
     {
-        gameInteractor = new GameInteractor(GridManager, this, "Words/word_storage");
+        int rows = 6;
+        int cols = 6;
+        ServiceLocator.Instance.Register(this);
+        ServiceLocator.Instance.Get<WordBaseLoader>().LoadBase(cols);
+
+
+        gameInteractor = new GameInteractor();
         GetComponentInChildren<InputManager>().Inject(gameInteractor);
         gameInteractor.Inject(new NormalSubmitter());
-        gameInteractor.StartGame(6,6);
+        gameInteractor.StartGame(rows, cols);
     }
 }
