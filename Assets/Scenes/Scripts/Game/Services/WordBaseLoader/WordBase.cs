@@ -13,5 +13,5 @@ public class WordBase
     }
 
     public bool Validate(string word) => (word != null && allWords.Contains(word)) ? true : false;
-    public string GetRandomWord() => mostlyUsing[Random.Range(0, allWords.Count)];
+    public string GetRandomWord() => mostlyUsing[Random.Range(0, mostlyUsing.Count)];
 }

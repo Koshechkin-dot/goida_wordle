@@ -7,7 +7,7 @@ public class WordBaseLoader : IService
     public void LoadBase(int numberOfLetters)
     {
         TextAsset all = (TextAsset)Resources.Load($"Words/All_{numberOfLetters}");
-        TextAsset mostlyUsing = (TextAsset)Resources.Load($"Words/All_{numberOfLetters}");
+        TextAsset mostlyUsing = (TextAsset)Resources.Load($"Words/Common_{numberOfLetters}");
 
         if(all == null || mostlyUsing == null) 
         {

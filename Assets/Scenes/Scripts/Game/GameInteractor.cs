@@ -32,6 +32,7 @@ public class GameInteractor : IGameInput
     public void StartGame(int rows, int columns)
     {
         SecretWord = "РАБОТА"; //поменять на релизе
+        gameManager.word = SecretWord;
         rowPointer = 0;
         tilePointer = 0;
         this.rows = rows;
@@ -83,7 +84,7 @@ public class GameInteractor : IGameInput
             }
             else
             {
-                //слово не прошло валидацию, надо придумать анимацию на это
+                currentRow.WrongWordAnimation();
             }
         }
     }

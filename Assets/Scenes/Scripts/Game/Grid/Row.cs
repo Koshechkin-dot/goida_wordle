@@ -8,6 +8,12 @@ public class Row : MonoBehaviour
 {
     public List<Tile> tiles { get; private set; }
 
+    private Animator animator;
+
+    private void Awake()
+    {
+    }
+
     public Tile this[int index]
     {
         get => tiles[index];
@@ -23,6 +29,10 @@ public class Row : MonoBehaviour
         this.tiles = tiles.ToList();
     }
 
+    public void WrongWordAnimation()
+    {
+        //animator.Play("Word doesn't exist");
+    }
 
     public string GetWord()
     {
