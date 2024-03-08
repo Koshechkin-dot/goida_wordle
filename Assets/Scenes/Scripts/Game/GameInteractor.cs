@@ -81,15 +81,16 @@ public class GameInteractor : IGameInput
             string userWord = currentRow.GetWord();
             if (wordBase.Validate(userWord))
             {
-                float seconds = timer.StopTimer();
                 if (wordSubmitter.SubmitWord(currentRow, SecretWord)) //если верно
                 {
+                    float seconds = timer.StopTimer();
                     int result = (int)(100 * (rows - rowPointer + 1) / seconds * columns);
                     eventBus.Invoke(new ScoreChanged(result));
                     StartGame();
                 }
                 else if (rowPointer + 1 >= rows) //если попытки кончились
                 {
+                    timer.StopTimer();
                     eventBus.Invoke(new ScoreClear());
                     StartGame();
                 }
