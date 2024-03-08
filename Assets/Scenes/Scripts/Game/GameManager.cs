@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour, IService
         GetComponentInChildren<InputManager>().Inject(gameInteractor);
         GetComponentInChildren<VirtualKeyboard>().Inject(gameInteractor);
         gameInteractor.Inject(new NormalSubmitter());
-        gameInteractor.StartGame(rows, cols);
+
+        gameInteractor.SetGridDimensions(rows, cols).StartGame();
     }
 }

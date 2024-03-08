@@ -6,12 +6,14 @@ public class GridManager : MonoBehaviour, IService
 {
     private List<Row> Rows;
     private TileState Default;
+    public bool Generated {  get; private set; }
 
     private void Awake()
     {
         ServiceLocator.Instance.Register(this);
         Rows = new List<Row>();
         Default = Resources.Load("TileStates/Default") as TileState;
+        Generated = false;
     }
 
     public void GenerateGrid(int rows, int cols)
@@ -32,6 +34,7 @@ public class GridManager : MonoBehaviour, IService
             component.SetTiles(tiles);
             Rows.Add(component);
         }
+        Generated = true;
     }
 
     public void ClearGrid()
@@ -51,6 +54,7 @@ public class GridManager : MonoBehaviour, IService
         for (int i = 0; i < Rows.Count; i++)
             Destroy(Rows[i].gameObject);
         Rows.Clear();
+        Generated = false;
     }
 
     public Row GetRow(int rowIndex) => Rows[rowIndex];

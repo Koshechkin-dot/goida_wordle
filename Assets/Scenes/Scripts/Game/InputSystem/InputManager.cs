@@ -39,10 +39,6 @@ public class InputManager : MonoBehaviour
             {
                 gameInput.SubmitWord();
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                gameInput.Restart();
-            }
             else
             {
                 foreach(KeyCode keyCode in ALLOWED_KEYS)

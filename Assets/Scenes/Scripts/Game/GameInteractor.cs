@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class GameInteractor : IGameInput
 {
@@ -14,33 +15,52 @@ public class GameInteractor : IGameInput
     private GameManager gameManager;
     private GridManager gridManager;
     private WordBase wordBase;
+    private Timer timer;
     private IWordSubmitter wordSubmitter;
     #endregion
 
     //берем ссылки на нужные сервисы
     public GameInteractor()
     {
-        eventBus = ServiceLocator.Instance.Get<EventBus>(); 
+        eventBus = ServiceLocator.Instance.Get<EventBus>();
         gameManager = ServiceLocator.Instance.Get<GameManager>();
         gridManager = ServiceLocator.Instance.Get<GridManager>();
         wordBase = ServiceLocator.Instance.Get<WordBaseLoader>().GetBase();
+        timer = ServiceLocator.Instance.Get<Timer>();
     }
 
     //прокидываем логику сабмиттера
     public void Inject(IWordSubmitter wordSubmitter) => this.wordSubmitter = wordSubmitter;
 
-    public void StartGame(int rows, int columns)
+    public GameInteractor SetGridDimensions(int rows, int columns)
     {
-        SecretWord = "РАБОТА"; //поменять на релизе
-        gameManager.word = SecretWord;
-        rowPointer = 0;
-        tilePointer = 0;
         this.rows = rows;
         this.columns = columns;
-        gridManager.GenerateGrid(rows, columns);
-        currentRow = gridManager.GetRow(rowPointer);
+        return this;
     }
-    
+
+    public void StartGame()
+    {
+        if(rows <= 0 || columns <= 0)
+        {
+            Debug.LogError($"TRY TO GENERATE GRID WITH ROWS = {rows}, COLUMNS = {columns}");
+            throw new ArgumentException("BAD GRID GENERATION");
+        }
+
+        SecretWord = wordBase.GetRandomWord();
+        gameManager.word = SecretWord; //удалить на релизе
+        rowPointer = 0;
+        tilePointer = 0;
+
+        if (gridManager.Generated)
+            gridManager.ClearGrid();
+        else
+            gridManager.GenerateGrid(rows, columns);
+
+        currentRow = gridManager.GetRow(rowPointer);
+        timer.StartTimer();
+    }
+
     public void AddLetter(char letter)
     {
         if (tilePointer < columns)
@@ -54,31 +74,24 @@ public class GameInteractor : IGameInput
         tilePointer = Mathf.Max(tilePointer - 1, 0);
         currentRow[tilePointer].SetLetter('\0');
     }
-    public void Restart()
-    {
-        rowPointer = 0;
-        tilePointer = 0;
-        currentRow = gridManager.GetRow(rowPointer);
-        SecretWord = wordBase.GetRandomWord();
-        gridManager.ClearGrid();
-        gameManager.word = SecretWord; //удалить на релизе
-    }  
     public void SubmitWord()
     {
         if (tilePointer == columns)
         {
             string userWord = currentRow.GetWord();
-            if(wordBase.Validate(userWord))
+            if (wordBase.Validate(userWord))
             {
+                float seconds = timer.StopTimer();
                 if (wordSubmitter.SubmitWord(currentRow, SecretWord)) //если верно
                 {
-                    eventBus.Invoke(new ScoreChanged(100));
-                    Restart();
+                    int result = (int)(100 * (rows - rowPointer + 1) / seconds * columns);
+                    eventBus.Invoke(new ScoreChanged(result));
+                    StartGame();
                 }
                 else if (rowPointer + 1 >= rows) //если попытки кончились
                 {
                     eventBus.Invoke(new ScoreClear());
-                    Restart();
+                    StartGame();
                 }
                 else GoNextTry(); //следующая попытка
             }
