@@ -8,7 +8,7 @@ public class Row : MonoBehaviour
 {
     public List<Tile> tiles { get; private set; }
 
-    private Animator animator;
+    public Animator animator;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class Row : MonoBehaviour
 
     public void WrongWordAnimation()
     {
-        //animator.Play("Word doesn't exist");
+        animator.Play("WrongWord", 0, 0);
     }
 
     public string GetWord()
