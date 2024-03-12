@@ -583,10 +583,10 @@ RectTransform:
   - {fileID: 1441411309}
   m_Father: {fileID: 1413012727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -12.635742, y: 149.33301}
-  m_SizeDelta: {x: -835.89, y: 298.656}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 137.056}
+  m_SizeDelta: {x: 1002.11, y: 270.101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &91499909
 MonoBehaviour:
@@ -3323,10 +3323,10 @@ RectTransform:
   - {fileID: 1159798604}
   m_Father: {fileID: 1413012727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.640991, y: 0.0025634766}
-  m_SizeDelta: {x: -821.9, y: -0.0048828}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1022.1, y: 0.000000003259629}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &770092791
 MonoBehaviour:
@@ -5155,10 +5155,10 @@ RectTransform:
   - {fileID: 1315643404}
   m_Father: {fileID: 1413012727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 388.16797, y: -39.9375}
-  m_SizeDelta: {x: -1637.5156, y: 79.8739}
+  m_SizeDelta: {x: 170.48438, y: 79.8739}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1300679182
 GameObject:
@@ -5467,8 +5467,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.636475, y: 91.99609}
-  m_SizeDelta: {x: -821.89, y: -340.06}
+  m_AnchoredPosition: {x: -1.2905273, y: 91.99609}
+  m_SizeDelta: {x: -844.58105, y: -340.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398762434
 MonoBehaviour:
@@ -5598,8 +5598,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 500
   m_ScaleFactor: 0.5
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0.75
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0.55
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
