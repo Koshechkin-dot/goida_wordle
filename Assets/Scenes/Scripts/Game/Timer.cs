@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class Timer : MonoBehaviour, IService

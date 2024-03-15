@@ -7,5 +7,6 @@ public class ServiceLocatorLoader : MonoBehaviour
         ServiceLocator.Instance.Register(GameObject.Find("Timer").GetComponent<Timer>());
         ServiceLocator.Instance.Register(new EventBus());
         ServiceLocator.Instance.Register(new WordBaseLoader());
+        ServiceLocator.Instance.Register(new GameConfigBuilder());
     }
 }

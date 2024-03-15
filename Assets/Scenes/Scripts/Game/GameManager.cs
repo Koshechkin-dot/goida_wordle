@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour, IService
@@ -9,17 +8,19 @@ public class GameManager : MonoBehaviour, IService
     private GameInteractor gameInteractor;
     void Start()
     {
-        int rows = 6;
-        int cols = 6;
         ServiceLocator.Instance.Register(this);
-        ServiceLocator.Instance.Get<WordBaseLoader>().LoadBase(cols);
-
-
+        GameConfig config = ServiceLocator.Instance.Get<GameConfigBuilder>().GetConfig();
+        ServiceLocator.Instance.Get<WordBaseLoader>().LoadBase(config.Columns);
         gameInteractor = new GameInteractor();
+        gameInteractor.Inject(config.Submitter);
         GetComponentInChildren<InputManager>().Inject(gameInteractor);
         GetComponentInChildren<VirtualKeyboard>().Inject(gameInteractor);
-        gameInteractor.Inject(new NormalSubmitter());
+        gameInteractor.StartGame(config.Rows, config.Columns);
+    }
 
-        gameInteractor.SetGridDimensions(rows, cols).StartGame();
+    private void OnDestroy()
+    {
+        gameInteractor.OnDestroy();
+        ServiceLocator.Instance.Unregister(this);
     }
 }

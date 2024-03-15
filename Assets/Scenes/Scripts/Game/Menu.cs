@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-
     [SerializeField] private GameObject MainMenu;
     [SerializeField] private GameObject SelectMenu;
+    [SerializeField] private GameObject CustomMenu;
+    [SerializeField] private Slider Rows;
+    [SerializeField] private Slider Columns;
 
     public void OnQuitClick() => Application.Quit();
 
@@ -17,6 +21,27 @@ public class Menu : MonoBehaviour
 
     public void OnEasyButtonClick()
     {
+        ServiceLocator.Instance.Get<GameConfigBuilder>().SetGrid(6, 6).SetSubmitter(new NormalSubmitter());
         SceneManager.LoadScene("Game");
+    }
+    public void OnHardButtonClick()
+    {
+        ServiceLocator.Instance.Get<GameConfigBuilder>().SetGrid(3, 6).SetSubmitter(new MemoryChallengeSubmitter());
+        SceneManager.LoadScene("Game");
+    }
+    public void OnCustomStartButtonClick()
+    {
+        ServiceLocator.Instance.Get<GameConfigBuilder>().SetGrid((int)Rows.value, (int)Columns.value).SetSubmitter(new NormalSubmitter());
+        SceneManager.LoadScene("Game");
+    }
+    public void OnCustomButtonClick()
+    {
+        SelectMenu.SetActive(false);
+        CustomMenu.SetActive(true);
+    }
+    public void OnCustomBackButtonClick()
+    {
+        SelectMenu.SetActive(true);
+        CustomMenu.SetActive(false);
     }
 }

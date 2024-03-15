@@ -16,6 +16,11 @@ public class GridManager : MonoBehaviour, IService
         Generated = false;
     }
 
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.Unregister(this);
+    }
+
     public void GenerateGrid(int rows, int cols)
     {
         GameObject rowRef = Resources.Load("Prefabs/Row") as GameObject;

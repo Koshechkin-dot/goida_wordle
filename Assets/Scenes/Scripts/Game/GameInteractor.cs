@@ -27,19 +27,33 @@ public class GameInteractor : IGameInput
         gridManager = ServiceLocator.Instance.Get<GridManager>();
         wordBase = ServiceLocator.Instance.Get<WordBaseLoader>().GetBase();
         timer = ServiceLocator.Instance.Get<Timer>();
+        eventBus.Subscribe<NextWordEvent>(Restart);
+    }
+    public void OnDestroy()
+    {
+        eventBus.Unsubscribe<NextWordEvent>(Restart);
     }
 
     //прокидываем логику сабмиттера
     public void Inject(IWordSubmitter wordSubmitter) => this.wordSubmitter = wordSubmitter;
 
-    public GameInteractor SetGridDimensions(int rows, int columns)
+    public void Restart(NextWordEvent @event)
     {
-        this.rows = rows;
-        this.columns = columns;
-        return this;
+        SecretWord = wordBase.GetRandomWord();
+        gameManager.word = SecretWord; //удалить на релизе
+        rowPointer = 0;
+        tilePointer = 0;
+
+        if (gridManager.Generated)
+            gridManager.ClearGrid();
+        else
+            gridManager.GenerateGrid(rows, columns);
+
+        currentRow = gridManager.GetRow(rowPointer);
+        timer.StartTimer();
     }
 
-    public void StartGame()
+    public void StartGame(int rows, int columns)
     {
         if(rows <= 0 || columns <= 0)
         {
@@ -47,6 +61,8 @@ public class GameInteractor : IGameInput
             throw new ArgumentException("BAD GRID GENERATION");
         }
 
+        this.rows = rows;
+        this.columns = columns;
         SecretWord = wordBase.GetRandomWord();
         gameManager.word = SecretWord; //удалить на релизе
         rowPointer = 0;
@@ -86,20 +102,21 @@ public class GameInteractor : IGameInput
                     float seconds = timer.StopTimer();
                     int result = (int)(100 * (rows - rowPointer + 1) / seconds * columns);
                     eventBus.Invoke(new ScoreChanged(result));
-                    StartGame();
+                    eventBus.Invoke(new ResultShowEvent(result.ToString(), 
+                                                        seconds.ToString() + " сек", 
+                                                        "Вы победили!\nЗагаданное слово: " + SecretWord));
                 }
                 else if (rowPointer + 1 >= rows) //если попытки кончились
                 {
-                    timer.StopTimer();
+                    float seconds = timer.StopTimer();
                     eventBus.Invoke(new ScoreClear());
-                    StartGame();
+                    eventBus.Invoke(new ResultShowEvent("0", 
+                                                        seconds.ToString() + " сек", 
+                                                        "Вы проиграли!\nЗагаданное слово: " + SecretWord));
                 }
                 else GoNextTry(); //следующая попытка
             }
-            else
-            {
-                currentRow.WrongWordAnimation();
-            }
+            else currentRow.WrongWordAnimation();
         }
     }
 
