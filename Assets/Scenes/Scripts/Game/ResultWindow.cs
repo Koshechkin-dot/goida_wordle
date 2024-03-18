@@ -8,6 +8,7 @@ public class ResultWindow : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Score;
     [SerializeField] private TextMeshProUGUI Timer;
     [SerializeField] private TextMeshProUGUI SecretWord;
+    [SerializeField] private Image ResultW;
     [SerializeField] private Image BackB;
     [SerializeField] private Image NextWordB;
     private EventBus bus;
@@ -28,13 +29,29 @@ public class ResultWindow : MonoBehaviour
     public void Activate(ResultShowEvent state)
     {
         gameObject.SetActive(true);
+        OnObjectSetActive(true);
         Score.text = state.Score;
         Timer.text = state.Timer;
-        SecretWord.text = state.SecretWord;   
+        SecretWord.text = state.SecretWord;
+    }
+
+    public void OnObjectSetActive(bool state)
+    {
+        if (state)
+        {
+            LeanTween.scale(ResultW.rectTransform, new Vector2(1.2f, 1.2f), 1.0f)
+                .setEase(LeanTweenType.easeOutQuad);
+        }
+        else
+        {
+            LeanTween.scale(ResultW.rectTransform, new Vector2(1.0f, 1.0f), 1.0f)
+                .setEase(LeanTweenType.easeOutQuad);
+        }
     }
 
     public void OnBackButtonClick()
     {
+        OnObjectSetActive(false);
         gameObject.SetActive(false);
         SceneManager.LoadScene("Menu");
     }
@@ -53,6 +70,7 @@ public class ResultWindow : MonoBehaviour
 
     public void OnNextWordButtonClick()
     {
+        OnObjectSetActive(false);
         gameObject.SetActive(false);
         bus.Invoke(new NextWordEvent());
     }

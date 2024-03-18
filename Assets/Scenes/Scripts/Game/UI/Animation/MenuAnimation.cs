@@ -9,6 +9,7 @@ public class MenuAnimation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Title;
     [SerializeField] private Image StartB;
     [SerializeField] private Image ExitB;
+    [SerializeField] private Image[] SelectB;
 
     public void OnTitlePDown()
     {
@@ -43,6 +44,18 @@ public class MenuAnimation : MonoBehaviour
     public void OnExitButtonPExit()
     {
         LeanTween.scale(ExitB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
+            .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void OnSelectButtonPEnter(int i)
+    {
+        LeanTween.scale(SelectB[i].rectTransform, new Vector2(1.1f, 1.1f), 0.3f)
+            .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void OnSelectButtonPExit(int i)
+    {
+        LeanTween.scale(SelectB[i].rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
     }
 }

@@ -975,6 +975,10 @@ MonoBehaviour:
   Title: {fileID: 1721319640}
   StartB: {fileID: 1317517159}
   ExitB: {fileID: 1901931432}
+  SelectB:
+  - {fileID: 1733270343}
+  - {fileID: 1709294844}
+  - {fileID: 1676522480}
 --- !u!1 &221629329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,6 +3365,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 219828849}
+          m_TargetAssemblyTypeName: MenuAnimation, Assembly-CSharp
+          m_MethodName: OnSelectButtonPEnter
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 219828849}
+          m_TargetAssemblyTypeName: MenuAnimation, Assembly-CSharp
+          m_MethodName: OnSelectButtonPExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1709294842
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,6 +3499,38 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 219828849}
+          m_TargetAssemblyTypeName: MenuAnimation, Assembly-CSharp
+          m_MethodName: OnSelectButtonPEnter
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 219828849}
+          m_TargetAssemblyTypeName: MenuAnimation, Assembly-CSharp
+          m_MethodName: OnSelectButtonPExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3745,6 +3813,38 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Menu, Assembly-CSharp
           m_MethodName: OnEasyButtonClick
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 219828849}
+          m_TargetAssemblyTypeName: MenuAnimation, Assembly-CSharp
+          m_MethodName: OnSelectButtonPEnter
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 219828849}
+          m_TargetAssemblyTypeName: MenuAnimation, Assembly-CSharp
+          m_MethodName: OnSelectButtonPExit
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

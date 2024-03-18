@@ -8086,6 +8086,7 @@ MonoBehaviour:
   Score: {fileID: 1997787614}
   Timer: {fileID: 1774691263}
   SecretWord: {fileID: 283418033}
+  ResultW: {fileID: 1959835378}
   BackB: {fileID: 1543977249}
   NextWordB: {fileID: 1501092309}
 --- !u!114 &1959835378
