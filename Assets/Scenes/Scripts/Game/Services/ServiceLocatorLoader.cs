@@ -11,7 +11,7 @@ public class ServiceLocatorLoader : MonoBehaviour
             ServiceLocator.Instance.Register(new EventBus());
             ServiceLocator.Instance.Register(new WordBaseLoader());
             ServiceLocator.Instance.Register(new GameConfigBuilder());
-            ServiceLocator.Instance.Register(new GameObject().AddComponent<AudioSource>().AddComponent<AudioManager>());
+            ServiceLocator.Instance.Register(new DailyOrNot());
         }   
     }
 }
