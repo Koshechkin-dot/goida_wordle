@@ -30,6 +30,7 @@ public class Score : MonoBehaviour
     public void UpdateScore(ScoreChanged score)
     {
         ScoreCount += score.Score;
+        ScoreCount = Mathf.Clamp(ScoreCount, 0, int.MaxValue);
         text.text = ScoreCount.ToString();
 
         PlayerPrefs.SetInt("Score", ScoreCount);

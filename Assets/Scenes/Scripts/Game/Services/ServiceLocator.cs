@@ -7,6 +7,8 @@ public class ServiceLocator : MonoBehaviour
     private readonly Dictionary<string, IService> services = new Dictionary<string, IService>();
 
     private static ServiceLocator instance;
+
+    public static bool IsLoaded { get; private set; }
     public static ServiceLocator Instance
     {
         get
@@ -15,6 +17,7 @@ public class ServiceLocator : MonoBehaviour
             {
                 instance = new GameObject("ServiceLocator").AddComponent<ServiceLocator>();
                 DontDestroyOnLoad(instance.gameObject);
+                IsLoaded = true;
             }
             return instance;
         }

@@ -21,6 +21,8 @@ public class InputManager : MonoBehaviour
         { KeyCode.Z, 'Я' }, { KeyCode.X, 'Ч' }, { KeyCode.C, 'С' }, { KeyCode.V, 'М' }, { KeyCode.B, 'И' },
         { KeyCode.N, 'Т' }, { KeyCode.M, 'Ь' }, { KeyCode.Comma, 'Б' }, { KeyCode.Period, 'Ю' }, { KeyCode.BackQuote, 'Ё' },
     };
+    private bool IsEnabled = true;
+    private EventBus bus;
 
     public void Inject(IGameInput gameInput)
     {
@@ -29,7 +31,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if(IsEnabled)
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
@@ -41,7 +43,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                foreach(KeyCode keyCode in ALLOWED_KEYS)
+                foreach (KeyCode keyCode in ALLOWED_KEYS)
                 {
                     if (Input.GetKeyDown(keyCode))
                     {
@@ -49,7 +51,23 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
-
         }
     }
+
+
+    private void Start()
+    {
+        bus = ServiceLocator.Instance.Get<EventBus>();
+        bus.Subscribe<IMEvent>(EnableSwitcher);
+    }
+    private void OnDestroy()
+    {
+        bus.Unsubscribe<IMEvent>(EnableSwitcher);
+    }
+
+    private void EnableSwitcher(IMEvent @event)
+    {
+        IsEnabled = @event.IsEnabled;
+    }
+    
 }

@@ -99,6 +99,7 @@ public class GameInteractor : IGameInput
             {
                 if (wordSubmitter.SubmitWord(currentRow, SecretWord)) //если верно
                 {
+                    eventBus.Invoke(new IMEvent(false));
                     float seconds = timer.StopTimer();
                     int result = (int)(100 * (rows - rowPointer + 1) / seconds * columns);
                     eventBus.Invoke(new ScoreChanged(result));
@@ -108,9 +109,11 @@ public class GameInteractor : IGameInput
                 }
                 else if (rowPointer + 1 >= rows) //если попытки кончились
                 {
+                    eventBus.Invoke(new IMEvent(false));
                     float seconds = timer.StopTimer();
-                    eventBus.Invoke(new ScoreClear());
-                    eventBus.Invoke(new ResultShowEvent("0", 
+                    int result = (int)(100 * (rows - rowPointer + 1) / seconds * columns) * -1;
+                    eventBus.Invoke(new ScoreChanged(result));
+                    eventBus.Invoke(new ResultShowEvent(result.ToString(), 
                                                         seconds.ToString() + " сек", 
                                                         "Вы проиграли!\nЗагаданное слово: " + SecretWord));
                 }
