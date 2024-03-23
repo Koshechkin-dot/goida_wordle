@@ -10,6 +10,7 @@ public class MenuAnimation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI InfoField;
     [SerializeField] private Image StartB;
     [SerializeField] private Image ExitB;
+    [SerializeField] private Image DailyB;
     [SerializeField] private Image[] SelectB;
 
     private void SetInfoText(string text) => InfoField.text = text;
@@ -52,6 +53,21 @@ public class MenuAnimation : MonoBehaviour
     {
         LeanTween.scale(ExitB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void OnDailyButtonPEnter()
+    {
+        LeanTween.scale(DailyB.rectTransform, new Vector2(1.1f, 1.1f), 0.3f)
+            .setEase(LeanTweenType.easeOutQuad);
+        SetInfoText("Новое слово каждый день, успейте его отгадать.");
+        InfoField.CrossFadeAlpha(1f, 0.2f, true);
+    }
+
+    public void OnDailyButtonPExit()
+    {
+        LeanTween.scale(DailyB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
+            .setEase(LeanTweenType.easeOutQuad);
+        InfoField.CrossFadeAlpha(0f, 0.2f, true);
     }
 
     public void OnSelectButtonPEnter(int i)
