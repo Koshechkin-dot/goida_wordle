@@ -7,7 +7,7 @@ public class TimeViewer : MonoBehaviour
     private EventBus eventBus;
 
     private int seconds = 0;
-    private int minuts = 0;
+    private int minutes = 0;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class TimeViewer : MonoBehaviour
         seconds++;
         if (seconds >= 60)
         {
-            minuts++;
+            minutes++;
             seconds -= 60;
         }
         UpdateGUI();
@@ -38,9 +38,9 @@ public class TimeViewer : MonoBehaviour
     private void TimerRestart(TimerRestart stop)
     {
         seconds = 0;
-        minuts = 0;
+        minutes = 0;
         UpdateGUI();
     }
 
-    private void UpdateGUI() => text.text = $"{minuts}:{seconds}";
+    private void UpdateGUI() => text.text = $"{minutes}:{seconds:D2}";
 }
