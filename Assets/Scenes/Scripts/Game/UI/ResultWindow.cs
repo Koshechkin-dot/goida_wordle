@@ -8,6 +8,7 @@ public class ResultWindow : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Score;
     [SerializeField] private TextMeshProUGUI Timer;
     [SerializeField] private TextMeshProUGUI SecretWord;
+    [SerializeField] private GameObject nextWordButton;
     [SerializeField] private Image ResultW;
     [SerializeField] private Image BackB;
     [SerializeField] private Image NextWordB;
@@ -28,6 +29,7 @@ public class ResultWindow : MonoBehaviour
     public void Activate(ResultShowEvent state)
     {
         gameObject.SetActive(true);
+        nextWordButton.SetActive(!state.ShowNextButton);
         OnObjectSetActive(true);
         Score.text = state.Score;
         Timer.text = state.Timer;

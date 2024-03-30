@@ -26,6 +26,11 @@ public class GameConfigBuilder : IService
         config.Columns = cols;
         return this;
     }
+    public GameConfigBuilder SetDaily(bool IsDaily)
+    {
+        config.Daily = IsDaily;
+        return this;
+    }
     public GameConfig GetConfig()
     {
         return config;

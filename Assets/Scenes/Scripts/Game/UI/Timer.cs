@@ -1,41 +1,67 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Timer : MonoBehaviour, IService
 {
-    private int TotalSeconds = 0;
-
+    private TextMeshProUGUI text;
     private EventBus eventBus;
 
-    private IEnumerator counter;
+    private int seconds;
+    private int minutes;
+    public int totalSeconds { get; private set; }
+    private IEnumerator timer;
 
-    private void Start()
+    private void Awake()
     {
-        DontDestroyOnLoad(this);
+        ServiceLocator.Instance.Register(this);
+        Restart();
+        text = GetComponent<TextMeshProUGUI>();
         eventBus = ServiceLocator.Instance.Get<EventBus>();
-        counter = Counter();
+        eventBus.Subscribe<TimerStart>(StartTimer);
+        eventBus.Subscribe<TimerStop>(StopTimer);
+        timer = Counter();
     }
-
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.Unregister(this);
+        eventBus.Unsubscribe<TimerStart>(StartTimer);
+        eventBus.Unsubscribe<TimerStop>(StopTimer);
+    }
+    private void Restart()
+    {
+        totalSeconds = 0;
+        seconds = 0;
+        minutes = 0;
+    }
     private IEnumerator Counter()
     {
         while (true)
         {
-            eventBus.Invoke(new TimerTick());
-            TotalSeconds++;
+            totalSeconds++;
+            seconds++;
+            if (seconds >= 60)
+            {
+                minutes++;
+                seconds -= 60;
+            }
             yield return new WaitForSeconds(1);
-        }               
+        }
     }
 
-    public void StartTimer()
+    public void StartTimer(TimerStart @event)
     {
-        TotalSeconds = 0;
-        eventBus.Invoke(new TimerRestart());
-        StartCoroutine(counter);
+        Restart();
+        StartCoroutine(timer);
     }
 
-    public int StopTimer()
+    public void StopTimer(TimerStop @event)
     {
-        StopCoroutine(counter);
-        return TotalSeconds;
+        StopCoroutine(timer);
+    }
+
+    private void LateUpdate()
+    {
+        text.text = $"{minutes}:{seconds:D2}";
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class DailyQuest : MonoBehaviour
@@ -9,19 +10,18 @@ public class DailyQuest : MonoBehaviour
         string lastDate = PlayerPrefs.GetString("Date");
         if(lastDate != DateTime.Now.Date.ToString())
         {
-            gameObject.SetActive(true);
+            GetComponent<EventTrigger>().enabled = true;
         }
         else
         {
-            gameObject.SetActive(false);
+            GetComponent<EventTrigger>().enabled = false;
         }
     }
 
     public void OnClick()
     {
         PlayerPrefs.SetString("Date", DateTime.Now.Date.ToString());
-        ServiceLocator.Instance.Get<DailyOrNot>().Value = true;
-        ServiceLocator.Instance.Get<GameConfigBuilder>().SetGrid(5, 5).SetSubmitter(new NormalSubmitter());
+        ServiceLocator.Instance.Get<GameConfigBuilder>().SetGrid(5, 5).SetSubmitter(new NormalSubmitter()).SetDaily(true);
         SceneManager.LoadScene("Game");
     }
 

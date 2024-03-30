@@ -2657,50 +2657,6 @@ RectTransform:
   m_AnchoredPosition: {x: 242.15916, y: -485.84888}
   m_SizeDelta: {x: 484.31833, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1303449718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1303449720}
-  - component: {fileID: 1303449719}
-  m_Layer: 0
-  m_Name: Timer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1303449719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303449718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ffa9077420c2b94e85296469bff8659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1303449720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303449718}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1028.8336, y: 524.4913, z: -5.6746635}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317517156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,7 +3139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.5003662, y: -6.5}
+  m_AnchoredPosition: {x: -3.5002441, y: -6.5}
   m_SizeDelta: {x: -141.02637, y: -128.58374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446511888
@@ -5016,4 +4972,3 @@ SceneRoots:
   - {fileID: 221629332}
   - {fileID: 219828848}
   - {fileID: 378066242}
-  - {fileID: 1303449720}
