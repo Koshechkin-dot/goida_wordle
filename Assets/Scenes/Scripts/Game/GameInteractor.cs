@@ -19,7 +19,6 @@ public class GameInteractor : IGameInput
     private IWordSubmitter wordSubmitter;
     #endregion
 
-    //берем ссылки на нужные сервисы
     public GameInteractor()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();
@@ -34,7 +33,6 @@ public class GameInteractor : IGameInput
         eventBus.Unsubscribe<NextWordEvent>(Restart);
     }
 
-    //прокидываем логику сабмиттера
     public void Inject(IWordSubmitter wordSubmitter) => this.wordSubmitter = wordSubmitter;
 
     public void Restart(NextWordEvent @event)
@@ -60,7 +58,17 @@ public class GameInteractor : IGameInput
         gridManager.GenerateGrid(rows, columns);
         this.rows = rows;
         this.columns = columns;
-        SecretWord = wordBase.GetRandomWord();
+
+        if (ServiceLocator.Instance.Get<GameConfigBuilder>().GetConfig().Daily)
+        {
+            DateTime currentDate = DateTime.Now;
+            int seed = (currentDate.Year * 10000) + (currentDate.Month * 100) + currentDate.Day;
+            SecretWord = wordBase.GetSeeded(seed);
+        }
+        else
+        {
+            SecretWord = wordBase.GetRandomWord();
+        }
         gameManager.word = SecretWord; //удалить на релизе
         rowPointer = 0;
         tilePointer = 0;
@@ -123,6 +131,12 @@ public class GameInteractor : IGameInput
                                                 seconds.ToString() + " сек",
                                                 "Вы победили!\nЗагаданное слово: " + SecretWord,
                                                 ServiceLocator.Instance.Get<GameConfigBuilder>().GetConfig().Daily));
+            if(ServiceLocator.Instance.Get<GameConfigBuilder>().GetConfig().Daily)
+            {
+                int prev = PlayerPrefs.GetInt("DailyStreak");
+                PlayerPrefs.SetInt("DailyStreak", prev + 1);
+                PlayerPrefs.Save();
+            }
         }
         else
         {
@@ -135,6 +149,11 @@ public class GameInteractor : IGameInput
                                                 seconds.ToString() + " сек",
                                                 "Вы проиграли!\nЗагаданное слово: " + SecretWord,
                                                 ServiceLocator.Instance.Get<GameConfigBuilder>().GetConfig().Daily));
+            if (ServiceLocator.Instance.Get<GameConfigBuilder>().GetConfig().Daily)
+            {
+                PlayerPrefs.SetInt("DailyStreak", 0);
+                PlayerPrefs.Save();
+            }
         }
     }
 }

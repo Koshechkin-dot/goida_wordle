@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DailyQuest : MonoBehaviour
 {
-    void Awake()
+    void Start()
     {
         string lastDate = PlayerPrefs.GetString("Date");
         if(lastDate != DateTime.Now.Date.ToString())
