@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject MainMenu;
     [SerializeField] private GameObject SelectMenu;
     [SerializeField] private GameObject CustomMenu;
+    [SerializeField] private GameObject BackButton;
     [SerializeField] private Slider Rows;
     [SerializeField] private Slider Columns;
 
@@ -17,6 +18,22 @@ public class Menu : MonoBehaviour
     {
         MainMenu.SetActive(false);
         SelectMenu.SetActive(true);
+        BackButton.SetActive(true);
+    }
+
+    public void OnBackClick()
+    {
+        if (SelectMenu.activeInHierarchy)
+        {
+            SelectMenu.SetActive(false);
+            MainMenu.SetActive(true);
+            BackButton.SetActive(false);
+        }
+        if (CustomMenu.activeInHierarchy)
+        {
+            CustomMenu.SetActive(false);
+            SelectMenu.SetActive(true);
+        }
     }
 
     public void OnEasyButtonClick()

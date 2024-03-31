@@ -11,6 +11,7 @@ public class MenuAnimation : MonoBehaviour
     [SerializeField] private Image StartB;
     [SerializeField] private Image ExitB;
     [SerializeField] private Image DailyB;
+    [SerializeField] private Image BackB;
     [SerializeField] private Image[] SelectB;
 
     private void SetInfoText(string text) => InfoField.text = text;
@@ -52,6 +53,18 @@ public class MenuAnimation : MonoBehaviour
     public void OnExitButtonPExit()
     {
         LeanTween.scale(ExitB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
+            .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void OnBackButtonPEnter()
+    {
+        LeanTween.scale(BackB.rectTransform, new Vector2(1.1f, 1.1f), 0.3f)
+            .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    public void OnBackButtonPExit()
+    {
+        LeanTween.scale(BackB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
     }
 
