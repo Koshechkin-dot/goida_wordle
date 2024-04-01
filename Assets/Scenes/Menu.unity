@@ -4563,7 +4563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GOIDLE
+  m_text: "\u0421\u041B\u041E\u0412\u0415\u0427\u041A\u0418\u041D\u0421"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a6e022c9bcf10b4fbe1d18c170579d5, type: 2}
   m_sharedMaterial: {fileID: 1970408265171676068, guid: 0a6e022c9bcf10b4fbe1d18c170579d5, type: 2}
@@ -4590,8 +4590,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 150
-  m_fontSizeBase: 150
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
