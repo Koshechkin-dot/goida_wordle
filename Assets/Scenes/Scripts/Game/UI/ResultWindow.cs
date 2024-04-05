@@ -39,12 +39,12 @@ public class ResultWindow : MonoBehaviour
     {
         if (state)
         {
-            LeanTween.scale(ResultW.rectTransform, new Vector2(1.2f, 1.2f), 1.0f)
+            LeanTween.scale(ResultW.rectTransform, new Vector3(1.2f, 1.2f, 1.0f), 1.0f)
                 .setEase(LeanTweenType.easeOutQuad);
         }
         else
         {
-            LeanTween.scale(ResultW.rectTransform, new Vector2(1.0f, 1.0f), 1.0f)
+            LeanTween.scale(ResultW.rectTransform, new Vector3(1.0f, 1.0f, 1.0f), 1.0f)
                 .setEase(LeanTweenType.easeOutQuad);
         }
     }
@@ -64,22 +64,22 @@ public class ResultWindow : MonoBehaviour
 
     public void OnBackButtonPEnter()
     {
-        LeanTween.scale(BackB.rectTransform, new Vector2(1.1f, 1.1f), 0.3f)
+        LeanTween.scale(BackB.rectTransform, new Vector3(1.1f, 1.1f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
     }
     public void OnBackButtonPExit()
     {
-        LeanTween.scale(BackB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
+        LeanTween.scale(BackB.rectTransform, new Vector3(1.0f, 1.0f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
     }
     public void OnNextWordButtonPEnter()
     {
-        LeanTween.scale(NextWordB.rectTransform, new Vector2(1.1f, 1.1f), 0.3f)
+        LeanTween.scale(NextWordB.rectTransform, new Vector3(1.1f, 1.1f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
     }
     public void OnNextWordButtonPExit()
     {
-        LeanTween.scale(NextWordB.rectTransform, new Vector2(1.0f, 1.0f), 0.3f)
+        LeanTween.scale(NextWordB.rectTransform, new Vector3(1.0f, 1.0f, 1.0f), 0.3f)
             .setEase(LeanTweenType.easeOutQuad);
     }
 }
