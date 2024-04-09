@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +12,12 @@ public class DailyQuest : MonoBehaviour
         if(lastDate != DateTime.Now.Date.ToString())
         {
             GetComponent<EventTrigger>().enabled = true;
+            GetComponent<Image>().color = Color.white;
         }
         else
         {
             GetComponent<EventTrigger>().enabled = false;
+            GetComponent<Image>().color = Color.gray;
         }
     }
 
