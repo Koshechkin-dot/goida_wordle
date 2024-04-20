@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class GameInteractor : IGameInput
 {
@@ -156,4 +158,6 @@ public class GameInteractor : IGameInput
             }
         }
     }
+
+    public int GetTryCounter() => rowPointer;
 }

@@ -1,10 +1,13 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IService
 {
     //this is only for debug
     [SerializeField] public string word;
+    [SerializeField] private GameObject warningWindow;
 
     private GameInteractor gameInteractor;
     void Start()
@@ -25,5 +28,21 @@ public class GameManager : MonoBehaviour, IService
     {
         gameInteractor.OnDestroy();
         ServiceLocator.Instance.Unregister(this);
+    }
+
+
+    public void BackToMenu()
+    {
+        if (gameInteractor.GetTryCounter() == 0)
+            SceneManager.LoadScene("Menu");
+        else
+        {
+            warningWindow.SetActive(true);
+        }
+    }
+    public void BackAfterWarning()
+    {
+        ServiceLocator.Instance.Get<EventBus>().Invoke(new ScoreMinus());
+        SceneManager.LoadScene("Menu");
     }
 }

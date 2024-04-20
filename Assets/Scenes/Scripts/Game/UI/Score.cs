@@ -13,7 +13,7 @@ public class Score : MonoBehaviour
 
         eventBus = ServiceLocator.Instance.Get<EventBus>();
         eventBus.Subscribe<ScoreChanged>(UpdateScore);
-        eventBus.Subscribe<ScoreClear>(ScoreClear);
+        eventBus.Subscribe<ScoreMinus>(ScoreMinus);
 
         ScoreCount = PlayerPrefs.GetInt("Score");
         text.text = ScoreCount.ToString();
@@ -22,7 +22,7 @@ public class Score : MonoBehaviour
     private void OnDestroy()
     {
         eventBus.Unsubscribe<ScoreChanged>(UpdateScore);
-        eventBus.Unsubscribe<ScoreClear>(ScoreClear);
+        eventBus.Unsubscribe<ScoreMinus>(ScoreMinus);
 
         PlayerPrefs.Save();
     }
@@ -37,12 +37,14 @@ public class Score : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void ScoreClear(ScoreClear score)
+    public void ScoreMinus(ScoreMinus score)
     {
-        ScoreCount = 0;
+        int scoreCurrent = PlayerPrefs.GetInt("Score");
+
+        ScoreCount = scoreCurrent - (int)(scoreCurrent * 0.3);
         text.text = ScoreCount.ToString();
 
-        PlayerPrefs.SetInt("Score", 0);
+        PlayerPrefs.SetInt("Score", ScoreCount);
         PlayerPrefs.Save();
     }
 }
