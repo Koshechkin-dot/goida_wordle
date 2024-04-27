@@ -103,17 +103,27 @@ public class GameInteractor : IGameInput
                 if (wordSubmitter.SubmitWord(currentRow, SecretWord)) //если верно
                 {
                     GenerateResults(true);
+                    TryShowAd();
                 }
                 else if (rowPointer + 1 >= rows) //если попытки кончились
                 {
                     GenerateResults(false);
+                    TryShowAd();
                 }
                 else GoNextTry(); //следующая попытка
             }
             else currentRow.WrongWordAnimation();
         }
     }
-
+    private void TryShowAd()
+    {
+        int rand = UnityEngine.Random.Range(1, 101);
+        if (rand > 35)
+        {
+            return;
+        }
+        YG.YandexGame.FullscreenShow();
+    }
     private void GoNextTry()
     {
         rowPointer++;
