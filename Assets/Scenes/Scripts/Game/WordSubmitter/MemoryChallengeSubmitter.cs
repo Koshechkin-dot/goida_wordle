@@ -41,11 +41,13 @@ public class MemoryChallengeSubmitter : IWordSubmitter
                 if (userWord[i] == SecretWord[i])
                 {
                     current[i].SetState(valid);
+                    ServiceLocator.Instance.Get<EventBus>().Invoke(new VirtualKeyboardEvent(KeyState.Green, userWord[i].ToString()));
                     validRecogniteLetters[userWord[i]]++;
                 }
                 else if (SecretWord.Contains(userWord[i]))
                 {
                     current[i].SetState(exist);
+                    ServiceLocator.Instance.Get<EventBus>().Invoke(new VirtualKeyboardEvent(KeyState.Yellow, userWord[i].ToString()));
                 }
                 else
                 {

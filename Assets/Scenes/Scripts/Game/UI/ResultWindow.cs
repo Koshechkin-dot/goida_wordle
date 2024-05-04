@@ -52,8 +52,10 @@ public class ResultWindow : MonoBehaviour
     {
         OnObjectSetActive(false);
         gameObject.SetActive(false);
+        bus.Invoke(new VirtualKeyboardClear());
         bus.Invoke(new NextWordEvent());
         bus.Invoke(new IMEvent(true));
+        
     }
     public void OnBackButtonClick()
     {
