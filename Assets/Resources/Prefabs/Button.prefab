@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 2017395648739059952}
   - component: {fileID: 4314003025979680795}
   - component: {fileID: 2180846802672676042}
-  - component: {fileID: 2796701646119187319}
   - component: {fileID: 1576183007553134953}
   m_Layer: 5
   m_Name: Button
@@ -233,47 +232,6 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
---- !u!114 &2796701646119187319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6752909660187609385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1576183007553134953}
-          m_TargetAssemblyTypeName: KeyboardAnimation, Assembly-CSharp
-          m_MethodName: OnKeyPDown
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1576183007553134953}
-          m_TargetAssemblyTypeName: KeyboardAnimation, Assembly-CSharp
-          m_MethodName: OnKeyPUp
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1576183007553134953
 MonoBehaviour:
   m_ObjectHideFlags: 0

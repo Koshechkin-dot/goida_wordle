@@ -6,16 +6,18 @@ public class KeyboardAnimation : MonoBehaviour
 {
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI textMesh;
+    private Color curr_c;
 
     public void OnKeyPDown()
     {
+        curr_c = image.color;
         image.color = Color.black;
         textMesh.color = Color.white;
     }
 
     public void OnKeyPUp()
     {
-        LeanTween.value(image.gameObject, image.color, Color.white, 0.5f).setOnUpdate((Color val) =>
+        LeanTween.value(image.gameObject, image.color, curr_c, 0.5f).setOnUpdate((Color val) =>
         {
             image.color = val;
         });
