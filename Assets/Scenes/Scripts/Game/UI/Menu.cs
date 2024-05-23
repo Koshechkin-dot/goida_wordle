@@ -32,7 +32,8 @@ public class Menu : MonoBehaviour
         if (CustomMenu.activeInHierarchy)
         {
             CustomMenu.SetActive(false);
-            SelectMenu.SetActive(true);
+            MainMenu.SetActive(true);
+            BackButton.SetActive(false);
         }
     }
 
